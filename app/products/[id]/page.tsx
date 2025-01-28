@@ -8,16 +8,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-
+type Params = Promise<{ id: string }>;
 
 type Props = {
-  params: { id: string }
+  params: Params;
 }
 
 
 const ProductDetails = async ({ params }: Props) => {
   // Await params before destructuring
-  const { id } =  params;
+  const { id } = await params;
 
   // async data fetching
   const product: Product = await getProductById(id);
