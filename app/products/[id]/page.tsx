@@ -10,8 +10,8 @@ import { formatNumber } from '@/lib/utils';
 import { Product } from '@/types';
 
 type Props = {
-  params: { id: string };
-};
+  params: Promise<{ id: string }>
+}
 
 const ProductDetails = async ({ params }: Props) => {
   // Await params before destructuring
