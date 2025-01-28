@@ -13,9 +13,11 @@ type Props = {
   params: { id: string };
 };
 
-const ProductDetails = async (props: Props) => {
-const { id } = props.params;
-  
+const ProductDetails = async ({ params }: Props) => {
+  // Await params before destructuring
+  const { id } = await params;
+
+  // async data fetching
   const product: Product = await getProductById(id);
   if (!product) redirect('/');
 
