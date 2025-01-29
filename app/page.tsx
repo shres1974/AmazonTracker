@@ -4,6 +4,7 @@ import Searchbar from '@/components/Searchbar';
 import HeroCarousel from '@/components/HeroCarousel';
 import { getAllProducts } from '@/lib/actions';
 import ProductCard from '@/components/ProductCard';
+import { Product } from '@/types';
 
 const Home = async () => {
   const allProducts = await getAllProducts();
@@ -55,7 +56,7 @@ const Home = async () => {
           Trending Deals
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {allProducts?.map((product) => (
+          {allProducts?.map((product:Product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>

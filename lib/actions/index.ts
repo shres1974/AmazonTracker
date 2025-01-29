@@ -76,6 +76,7 @@ export async function getAllProducts() {
   }
 }
 
+
 export async function getSimilarProducts(productId: string) {
   try {
     connectToDB();

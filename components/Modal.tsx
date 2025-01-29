@@ -1,36 +1,35 @@
-"use client"
-
-import { FormEvent, Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import Image from 'next/image'
-import { addUserEmailToProduct } from '@/lib/actions'
+"use client";
+import { FormEvent, Fragment, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import Image from 'next/image';
+import { addUserEmailToProduct } from '@/lib/actions';
 
 interface Props {
-  productId: string
+  productId: string;
 }
 
 const Modal = ({ productId }: Props) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [email, setEmail] = useState('')
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [email, setEmail] = useState('');
 
-  const openModal = () => setIsOpen(true)
-  const closeModal = () => setIsOpen(false)
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     try {
-      await addUserEmailToProduct(productId, email)
-      setEmail('')
-      closeModal()
+      await addUserEmailToProduct(productId, email);
+      setEmail('');
+      closeModal();
     } catch (err) {
-      console.error(err)
+      console.error(err);
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <>
@@ -72,7 +71,7 @@ const Modal = ({ productId }: Props) => {
                 {/* Header */}
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-2 border border-gray-200 rounded-lg flex items-center">
-                    <Image 
+                    <Image
                       src="/assets/icons/logo.svg"
                       alt="logo"
                       width={24}
@@ -100,14 +99,14 @@ const Modal = ({ productId }: Props) => {
                 {/* Form */}
                 <form className="mt-5 space-y-5" onSubmit={handleSubmit}>
                   <div>
-                    <label 
+                    <label
                       htmlFor="email"
                       className="block text-sm font-medium text-gray-700 mb-1"
                     >
                       Email address
                     </label>
                     <div className="flex items-center border border-gray-300 rounded-md px-3 py-2">
-                      <Image 
+                      <Image
                         src="/assets/icons/mail.svg"
                         alt="mail icon"
                         width={18}
@@ -138,7 +137,7 @@ const Modal = ({ productId }: Props) => {
         </Dialog>
       </Transition>
     </>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

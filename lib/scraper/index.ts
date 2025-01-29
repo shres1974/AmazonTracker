@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { extractCurrency, extractDescription, extractPrice } from '../utils';
+import { Decimal } from 'decimal.js';
 
 export async function scrapeAmazonProduct(url: string) {
     if (!url) return;
@@ -27,21 +28,20 @@ export async function scrapeAmazonProduct(url: string) {
         // Extract the Product title
         const title = $('#productTitle').text().trim();
 
-        const currentPrice = extractPrice(
+        const currentPrice = new Decimal(extractPrice(
             $('.priceToPay span.a-price-whole'),
             $('.a.size.base.a-color-price'),
             $('.a-button-selected .a-color-base'),
             $('.priceToPay .a-price-whole .a-price-fraction')
-            
-        );
-
-        const originalPrice = extractPrice(
+        )).toDecimalPlaces(2); // Ensure 2 decimal places
+        
+        const originalPrice = new Decimal(extractPrice(
             $('#priceblock_ourprice'),
             $('.a-price.a-text-price span.a-offscreen'),
             $('#listPrice'),
             $('#priceblock_dealprice'),
             $('.a-size-base.a-color-price')
-          );
+        )).toDecimalPlaces(2); // Ensure 2 decimal places
 
         const outOfStock = $('#availability span').text().trim().toLowerCase() === 'currently unavailable';
 
@@ -57,8 +57,9 @@ export async function scrapeAmazonProduct(url: string) {
         const description = extractDescription($)
         
         
-
-     
+        //console.log('Decimal Current Price:', currentPrice.toString()); // Log the Decimal value
+        //console.log('Decimal Original Price:', originalPrice.toString()); // Log the Decimal value
+        
         //console.log({ title, currentPrice, originalPrice, outOfStock, images, currency, discountRate});
 
         //Construct data object with scraped information
@@ -67,23 +68,26 @@ export async function scrapeAmazonProduct(url: string) {
             currency: currency || '$',
             image: imageUrls[0],
             title,
-            currentPrice: Number(currentPrice) || Number(originalPrice),
-            originalPrice: Number(originalPrice) || Number(currentPrice),
+            currentPrice: currentPrice.toNumber(), // Convert Decimal to number
+            originalPrice: originalPrice.toNumber(), // Convert Decimal to number
             priceHistory: [],
             discountRate: Number(discountRate),
             category: 'category',
-            reviewsCount:100,
+            reviewsCount: 100,
             stars: 4.5,
             isOutOfStock: outOfStock,
             description,
-            lowestPrice: Number(currentPrice) || Number(originalPrice),
-            highestPrice: Number(originalPrice) || Number(currentPrice),
-            averagePrice: Number(currentPrice) || Number(originalPrice),
-            
-          }
+            lowestPrice: currentPrice.toNumber(), // Convert Decimal to number
+            highestPrice: originalPrice.toNumber(), // Convert Decimal to number
+            averagePrice: currentPrice.toNumber(), // Convert Decimal to number
+        }
           return data;
 
     } catch (error: any) {
         throw new Error('Failed to scrape product: ${error.message}');
     }
+
+
+
+
 }

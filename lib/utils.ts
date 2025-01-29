@@ -37,13 +37,17 @@ export function extractCurrency(element: any) {
 }
 
 // Extracts description from two possible elements from amazon
-export function extractDescription($: any) {
-  // these are possible elements holding description of the product
-  const selectors = [
-    ".a-unordered-list .a-list-item",
-    ".a-expander-content p",
+export function extractDescription($: any, customSelectors: string[] = []) {
+  const defaultSelectors = [
+    "#feature-bullets .a-list-item", // Bullet points in the "About this item" section
+    ".a-unordered-list .a-list-item", // Fallback for unordered lists
+    ".a-expander-content p", // Expandable description
+    "#productDescription p", // Description in paragraphs
+    "#productDescription_feature_div .a-expander-content p", // Expandable description in another section
     // Add more selectors here if needed
   ];
+
+  const selectors = [...defaultSelectors, ...customSelectors];
 
   for (const selector of selectors) {
     const elements = $(selector);
@@ -51,13 +55,13 @@ export function extractDescription($: any) {
       const textContent = elements
         .map((_: any, element: any) => $(element).text().trim())
         .get()
+        .filter((text: string) => text.length > 0) // Remove empty lines
         .join("\n");
       return textContent;
     }
   }
 
-  // If no matching elements were found, return an empty string
-  return "";
+  return ""; // Return empty string if no description is found
 }
 
 export function getHighestPrice(priceList: PriceHistoryItem[]) {
@@ -112,7 +116,7 @@ export const getEmailNotifType = (
 
 export const formatNumber = (num: number = 0) => {
   return num.toLocaleString(undefined, {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   });
 };

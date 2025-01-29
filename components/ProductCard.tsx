@@ -1,13 +1,15 @@
 import { Product } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
+import React from 'react';
 
 interface Props {
   product: Product;
 }
 
 const ProductCard = ({ product }: Props) => {
+
+
   return (
     <Link
       href={`/products/${product._id}`}
@@ -33,14 +35,12 @@ const ProductCard = ({ product }: Props) => {
           {product.category}
         </p>
         <div className="mt-auto text-lg font-semibold text-gray-900">
-          {product.currency}
-          {product.currentPrice}
+          {product.currency} {`${Number(product.currentPrice).toFixed(2)}`}
         </div>
+
       </div>
     </Link>
-  )
-}
+  );
+};
 
-export default ProductCard
-
-
+export default ProductCard;

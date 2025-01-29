@@ -1,8 +1,8 @@
-"use client"
-import React from 'react'
-import Image from 'next/image'
-import "react-responsive-carousel/lib/styles/carousel.min.css"
-import { Carousel } from 'react-responsive-carousel'
+"use client";
+import React from 'react';
+import Image from 'next/image';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 const heroImages = [
   { imgUrl: '/assets/images/hero-1.svg', alt: 'smartwatch' },
@@ -10,7 +10,7 @@ const heroImages = [
   { imgUrl: '/assets/images/hero-3.svg', alt: 'lamp' },
   { imgUrl: '/assets/images/hero-4.svg', alt: 'air fryer' },
   { imgUrl: '/assets/images/hero-5.svg', alt: 'chair' },
-]
+];
 
 const HeroCarousel = () => {
   return (
@@ -38,7 +38,7 @@ const HeroCarousel = () => {
         ))}
       </Carousel>
 
-      {/* Decorative arrow on wide screens */}
+      {/* Decorative Arrow */}
       <div className="hidden xl:block absolute -left-16 bottom-0">
         <Image
           src="/assets/icons/hand-drawn-arrow.svg"
@@ -48,8 +48,7 @@ const HeroCarousel = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HeroCarousel
-
+export default HeroCarousel;

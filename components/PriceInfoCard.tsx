@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 interface Props {
   title: string;
@@ -15,7 +15,7 @@ const PriceInfoCard = ({ title, iconSrc, value }: Props) => {
         <p className="text-xl font-bold text-teal-600">{value}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PriceInfoCard
+export default PriceInfoCard;
