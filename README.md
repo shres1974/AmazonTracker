@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 TrackMyAmazon
 
-## Getting Started
+## 🚀 Overview
 
-First, run the development server:
+**TrackMyAmazon** is an Amazon product tracking platform built using **Next.js, TypeScript, Bright Data, MongoDB, and Cheerio**. It allows users to monitor **price fluctuations** 📉 and **stock availability** 📦, receiving **real-time notifications** 📩 when changes occur.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 🎯 Motivation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I built **TrackMyAmazon** out of frustration with **unpredictable price changes** on Amazon. Whether shopping for tech gadgets or daily essentials, I often found myself **manually checking prices** multiple times. This inspired me to create an **automated solution** 🤖 that scrapes product data, tracks price trends 📊, and alerts users when a **deal is available** 💰—saving both time and money!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 🔎 **Real-time product tracking**: Uses Bright Data and Cheerio to scrape and parse product details.
+- ⏳ **Automated updates**: Cron jobs ensure data is refreshed frequently.
+- 📧 **Email notifications**: Integrated with Nodemailer to send alerts for price drops and stock changes.
+- 🎨 **Seamless user experience**: Responsive frontend built with Tailwind CSS and Headless UI.
+- 📦 **Efficient data storage**: MongoDB used for structured product data management.
 
-## Learn More
+## 🛠 Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+### ✅ Prerequisites
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Ensure you have the following installed:
+- 🖥 **Node.js** (latest LTS recommended)
+- 🗄 **MongoDB** (local or cloud instance)
+- 🌐 **Bright Data Account** (for scraping capabilities)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 📥 Installation
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Clone the repository:
+```sh
+git clone https://github.com/yourusername/TrackMyAmazon.git
+cd TrackMyAmazon
